@@ -77,6 +77,7 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.status == false) {
+
                         var errors = response.errors;
                         if (errors.name) {
                             $("#name").addClass('is-invalid')
