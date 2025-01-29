@@ -85,46 +85,46 @@
                                 .addClass('invalid-feedback')
                                 .html(errors.name)
                         } else {
-                            $("#name").removeClass('is-invalied')
+                            $("#name").removeClass('is-invalid')
                                 .siblings('p')
-                                .removeClass('inviled-feedback')
+                                .removeClass('invalid-feedback')
                                 .html('')
                         }
 
                         if (errors.email) {
-                            $("#email").addClass('is-invalied')
+                            $("#email").addClass('is-invalid')
                                 .siblings('p')
-                                .addClass('inviled-feedback')
+                                .addClass('invalid-feedback')
                                 .html(errors.email)
                         } else {
-                            $("#email").removeClass('is-invalied')
+                            $("#email").removeClass('is-invalid')
                                 .siblings('p')
-                                .removeClass('inviled-feedback')
+                                .removeClass('invalid-feedback')
                                 .html('')
                         }
 
                         if (errors.password) {
-                            $("#password").addClass('is-invalied')
+                            $("#password").addClass('is-invalid')
                                 .siblings('p')
-                                .addClass('inviled-feedback')
+                                .addClass('invalid-feedback')
                                 .html(errors.password)
                         } else {
-                            $("#password").removeClass('is-invalied')
+                            $("#password").removeClass('is-invalid')
                                 .siblings('p')
-                                .removeClass('inviled-feedback')
+                                .removeClass('invalid-feedback')
                                 .html('')
                         }
 
 
                         if (errors.confirm_password) {
-                            $("#confirm_password").addClass('is-invalied')
+                            $("#confirm_password").addClass('is-invalid')
                                 .siblings('p')
-                                .addClass('inviled-feedback')
+                                .addClass('invalid-feedback')
                                 .html(errors.Confirm_password)
                         } else {
-                            $("#confirm_password").removeClass('is-invalied')
+                            $("#confirm_password").removeClass('is-invalid')
                                 .siblings('p')
-                                .removeClass('inviled-feedback')
+                                .removeClass('invalid-feedback')
                                 .html('')
                         }
 
@@ -134,22 +134,22 @@
                             .removeClass('inviled-feedback')
                             .html('');
 
-                        $("#email").removeClass('is-invalied')
+                        $("#email").removeClass('is-invalid')
+                            .siblings('p')
+                            .removeClass('invalid-feedback')
+                            .html('');
+
+                        $("#password").removeClass('is-invalid')
+                            .siblings('p')
+                            .removeClass('invalid-feedback')
+                            .html('');
+
+                        $("#confirm_password").removeClass('is-invalid')
                             .siblings('p')
                             .removeClass('inviled-feedback')
                             .html('');
 
-                        $("#password").removeClass('is-invalied')
-                            .siblings('p')
-                            .removeClass('inviled-feedback')
-                            .html('');
-
-                        $("#confirm_password").removeClass('is-invalied')
-                            .siblings('p')
-                            .removeClass('inviled-feedback')
-                            .html('');
-
-                        window.location.href = '{{ route('JobPortal.login') }}'
+                        window.location.href = "{{ route('JobPortal.login') }}";
 
                     }
                 }

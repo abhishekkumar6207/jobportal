@@ -10020,3 +10020,20 @@ footer .nav-link {
   content: '';
 }
 /* '' */
+.save-job a{
+    background: #00D363 !important;
+    color: #fff !important;
+}
+.trumbowyg-editor {
+    list-style: disc;
+}
+.dashboard{
+   height: 400px;
+    justify-content: center;
+    align-items: center;
+   display: flex;
+}
+.pagination span{
+    font-size: inherit;
+}
+

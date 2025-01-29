@@ -67,93 +67,43 @@
                     </div>
 
                     <div class="card border-0 shadow mb-4">
-                        <div class="card-body p-4">
-                            <h3 class="fs-4 mb-1">Change Password</h3>
-                            <div class="mb-4">
-                                <label for="" class="mb-2">Old Password*</label>
-                                <input type="password" name="old_password" id="old_password" placeholder="Old Password"
-                                    class="form-control">
+                        <form action="" name="changePasswordForm" id="changePasswordForm">
+                            <div class="card-body p-4">
+                                <h3 class="fs-4 mb-1">Change Password</h3>
+                                <div class="mb-4">
+                                    <label for="" class="mb-2">Old Password*</label>
+                                    <input type="password" name="old_password" id="old_password" placeholder="Old Password"
+                                        class="form-control">
+                                    <p></p>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="" class="mb-2">New Password*</label>
+                                    <input type="password" name="new_password" id="new_password" placeholder="New Password"
+                                        class="form-control">
+                                    <p></p>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="" class="mb-2">Confirm Password*</label>
+                                    <input type="password" id="confirm_password" name="confirm_password"
+                                        placeholder="Confirm Password" class="form-control">
+                                    <p></p>
+                                </div>
                             </div>
-                            <div class="mb-4">
-                                <label for="" class="mb-2">New Password*</label>
-                                <input type="password" name="new_password" id="new_password" placeholder="New Password"
-                                    class="form-control">
+                            <div class="card-footer  p-4">
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
-                            <div class="mb-4">
-                                <label for="" class="mb-2">Confirm Password*</label>
-                                <input type="password" id="confirm_password" name="confirm_password"
-                                    placeholder="Confirm Password" class="form-control">
-                            </div>
-                        </div>
-                        <div class="card-footer  p-4">
-                            <button type="button" class="btn btn-primary">Update</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title pb-0" id="exampleModalLabel">Change Profile Picture</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="" id="profilePicForm" name="profilePicForm">
-                        @method('PUT')
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Profile Image</label>
-                            <input type="file" class="form-control" id="image" name="image">
-                            <p class="text-danger" id="image-error"></p>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary mx-3">Update</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('customJs')
-    <script type="text/javascript">
-        $("#profilePicForm").submit(function(e) {
-            e.preventDefault();
-            var formData = new FormData(this);
-
-            $.ajax({
-                url: "{{ route('updateProfilePic') }}",
-                type: "post",
-                data: formData,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    console.log(response);
-                    if (response.status == false) {
-                        var errors = response.errors;
-                        if (errors.image) {
-                            $('#image-error').html(errors.image)
-                        } else {
-                            $('#image-error').html('')
-                        }
-                    } else {
-                        window.location.herf = "{{ url()->current() }}";
-                    }
-
-                },
-            });
-        });
-
-
-
+    <script>
         $('#userForm').submit(function(e) {
-            e.preventDefault();
+            e.preventDefault()
             $.ajax({
                 url: "{{ route('updateProfile') }}",
                 type: 'put',
@@ -162,7 +112,7 @@
                 success: function(response) {
                     console.log(response);
                     if (response.status == true) {
-                        $("#name").removeClass('is-invalid ')
+                        $("#name").removeClass('is-invalid')
                             .siblings('p')
                             .removeClass('invalid-feedback')
                             .html('')
@@ -171,7 +121,7 @@
                             .siblings('p')
                             .removeClass('invalid-feedback')
                             .html('')
-
+                        window.location.href = "{{ url()->current() }}";
                     } else {
                         var errors = response.errors;
                         if (errors.name) {
@@ -195,13 +145,83 @@
                                 .siblings('p')
                                 .removeClass('invalid-feedback')
                                 .html('')
-                            window.location.herf = "{{ route('account.profile') }}";
 
                         }
                     }
 
                 }
-            })
-        })
+            });
+        });
+
+
+        $('#changePasswordForm').submit(function(e) {
+            e.preventDefault(e),
+                $.ajax({
+                    url: "{{ route('changePassword') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    data: $('#changePasswordForm').serializeArray(),
+                    success: function(response) {
+                        console.log(response);
+                        window.location.href = "{{ url()->current() }}";
+                        if (response.status == true) {
+
+                            $("#old_password").removeClass('is-invalid ')
+                                .siblings('p')
+                                .removeClass('invalid-feedback')
+                                .html('')
+                            $("#new_password").removeClass('is-invalid ')
+                                .siblings('p')
+                                .removeClass('invalid-feedback')
+                                .html('')
+
+                            $("#confirm_password").removeClass('is-invalid ')
+                                .siblings('p')
+                                .removeClass('invalid-feedback')
+                                .html('')
+
+                        } else {
+                            var errors = response.errors;
+                            if (errors.old_password) {
+                                $("#old_password").addClass('is-invalid ')
+                                    .siblings('p')
+                                    .addClass('invalid-feedback')
+                                    .html(errors.old_password)
+                            } else {
+                                $("#old_password").removeClass('is-invalid ')
+                                    .siblings('p')
+                                    .removeClass('invalid-feedback')
+                                    .html('')
+                            }
+                            if (errors.new_password) {
+                                $("#new_password").addClass('is-invalid ')
+                                    .siblings('p')
+                                    .addClass('invalid-feedback')
+                                    .html(errors.new_password)
+                            } else {
+                                $("#new_password").removeClass('is-invalid ')
+                                    .siblings('p')
+                                    .removeClass('invalid-feedback')
+                                    .html('')
+                            }
+
+                            if (errors.confirm_password) {
+                                $("#confirm_password").addClass('is-invalid ')
+                                    .siblings('p')
+                                    .addClass('invalid-feedback')
+                                    .html(errors.confirm_password)
+                            } else {
+                                $("#confirm_password").removeClass('is-invalid ')
+                                    .siblings('p')
+                                    .removeClass('invalid-feedback')
+                                    .html('')
+                            }
+
+
+                        }
+
+                    }
+                });
+        });
     </script>
 @endsection

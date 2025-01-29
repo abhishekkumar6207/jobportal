@@ -3,13 +3,6 @@
     <section class="section-5">
         <div class="container my-5">
             <div class="py-lg-2">&nbsp;</div>
-            {{--
-        @if (session::has('success'))
-            <div class="alert alert-success">
-                 <p> {{session::get('success')}} </p>
-            </div> --}}
-
-
             @if (Session::has('success'))
                 <div class="alert alert-success">
                     <p class="mb-0 pb-0"> {{ Session::get('success') }} </p>
@@ -46,7 +39,7 @@
                             </div>
                             <div class="justify-content-between d-flex">
                                 <button class="btn btn-primary mt-2">Login</button>
-                                <a href="forgot-password.html" class="mt-3">Forgot Password?</a>
+                                <a href="{{route('forgotPassword')}}" class="mt-3">Forgot Password?</a>
                             </div>
                         </form>
                     </div>
